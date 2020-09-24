@@ -1,0 +1,46 @@
+ <!DOCTYPE html>
+<html>
+  <head>
+    
+    <style>
+      html, body { margin: 0; padding: 0; overflow: hidden; }
+    </style>
+  </head>
+  <body>
+    <script src="js/three.min.js"></script>
+      <script src="js/controls/OrbitControls.js"></script>
+    <script>
+		var startTime = Date.now();
+        
+        var winW = window.innerWidth;
+        var winH = window.innerHeight;
+
+         var scene = new THREE.Scene();
+         var camera = new THREE.PerspectiveCamera(50, winW / winH, 0.01, 10);
+
+         var renderer = new THREE.WebGLRenderer({ antialias: true });
+         renderer.setSize(winW, winH);
+         document.body.appendChild(renderer.domElement);
+
+          var radius = 4;
+          var height = 5;
+
+        var geometry = new THREE.CylinderGeometry(0, radius, height, 4, 1);
+        var material = new THREE.MeshNormalMaterial();
+        var pyramid = new THREE.Mesh(geometry, material);
+        scene.add(pyramid);
+
+         camera.position.z = 10;
+
+    var render = function () {
+      requestAnimationFrame(render);
+      pyramid.rotation.x += 0.0;
+      pyramid.rotation.y += 0.01;
+
+      renderer.render(scene, camera);
+    };
+
+    render();
+        </script>
+      </body>
+    </html>
